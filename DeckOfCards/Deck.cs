@@ -6,7 +6,6 @@ namespace Blackjack_Laborator12_.DeckOfCards
 {
     public class Deck
     {
-        //public static Card[] deck = new Card[52];
         public List<Card> deck = new List<Card>();
 
         /// <summary>
