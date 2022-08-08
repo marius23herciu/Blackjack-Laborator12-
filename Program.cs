@@ -10,6 +10,7 @@ namespace Blackjack_Laborator12_
         {
             Deck deck = new Deck();
             deck.FillDeck();
+            deck.ShuffleDeck();
 
             Player john = new Player("John");
             Player robert = new Player("Robert");
@@ -33,6 +34,9 @@ namespace Blackjack_Laborator12_
             andrew.DrawCard(deck);
             andrew.DrawCard(deck);
             Console.WriteLine(andrew);
+
+            deck.FillDeck();
+            deck.ShuffleDeck();
 
             Console.WriteLine($"Id of winner is:  {blackjack.Evaluate()}");
         }
