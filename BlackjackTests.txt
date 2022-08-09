@@ -1,0 +1,304 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Blackjack_Laborator12_.Games;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using Blackjack_Laborator12_.DeckOfCards;
+using Moq;
+using Blackjack_Laborator12_.Interfaces;
+
+namespace Blackjack_Laborator12_.Games.Tests
+{
+    [TestClass()]
+    public class BlackjackTests
+    {
+        public IPlayer GetPlayerMock()
+        {
+            Mock<IPlayer> playerMock = new Mock<IPlayer>();
+            playerMock.Setup(player => player.Id).Returns(Guid.NewGuid());
+            playerMock.Setup(player => player.listOfCards).Returns(new List<Card>());
+            IPlayer player = playerMock.Object;
+            return player;
+        }
+
+
+        [TestMethod()]
+        public void EvaluateTest1()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(11, "Diamond"));
+            player1.listOfCards.Add(new Card(10, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(7, "Spades"));
+            player2.listOfCards.Add(new Card(18, "Hearts"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+
+            string expectedWinner = player1.Id.ToString();
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+        [TestMethod()]
+        public void EvaluateTest2()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(14, "Diamond"));
+            player1.listOfCards.Add(new Card(11, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(10, "Spades"));
+            player2.listOfCards.Add(new Card(13, "Hearts"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+
+            string expectedWinner = null;
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+        [TestMethod()]
+        public void EvaluateTest3()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(10, "Diamond"));
+            player1.listOfCards.Add(new Card(10, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(7, "Spades"));
+            player2.listOfCards.Add(new Card(14, "Hearts"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+
+            string expectedWinner = player2.Id.ToString();
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+        [TestMethod()]
+        public void EvaluateTest4()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(11, "Diamond"));
+            player1.listOfCards.Add(new Card(10, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(10, "Spades"));
+            player2.listOfCards.Add(new Card(11, "Hearts"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+
+            string expectedWinner = player1.Id.ToString();
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+        [TestMethod()]
+        public void EvaluateTest5()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(10, "Diamond"));
+            player1.listOfCards.Add(new Card(10, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(14, "Spades"));
+            player2.listOfCards.Add(new Card(11, "Hearts"));
+
+            IPlayer player3 = GetPlayerMock();
+            player3.listOfCards.Add(new Card(10, "Spades"));
+            player3.listOfCards.Add(new Card(11, "Hearts"));
+
+            IPlayer player4 = GetPlayerMock();
+            player4.listOfCards.Add(new Card(10, "Spades"));
+            player4.listOfCards.Add(new Card(11, "Hearts"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+            blackjack.AddPlayer(player3);
+            blackjack.AddPlayer(player4);
+
+            string expectedWinner = player3.Id.ToString();
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+        [TestMethod()]
+        public void EvaluateTest6()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(10, "Diamond"));
+            player1.listOfCards.Add(new Card(10, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(8, "Spades"));
+            player2.listOfCards.Add(new Card(11, "Hearts"));
+            player2.listOfCards.Add(new Card(2, "Hearts"));
+
+            IPlayer player3 = GetPlayerMock();
+            player3.listOfCards.Add(new Card(10, "Spades"));
+            player3.listOfCards.Add(new Card(11, "Hearts"));
+            player3.listOfCards.Add(new Card(7, "Spades"));
+
+            IPlayer player4 = GetPlayerMock();
+            player4.listOfCards.Add(new Card(10, "Spades"));
+            player4.listOfCards.Add(new Card(11, "Hearts"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+            blackjack.AddPlayer(player3);
+            blackjack.AddPlayer(player4);
+
+            string expectedWinner = player2.Id.ToString();
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+        [TestMethod()]
+        public void EvaluateTest7()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(5, "Diamond"));
+            player1.listOfCards.Add(new Card(7, "Clubs"));
+            player1.listOfCards.Add(new Card(7, "Diamond"));
+            player1.listOfCards.Add(new Card(10, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(4, "Spades"));
+            player2.listOfCards.Add(new Card(2, "Hearts"));
+            player2.listOfCards.Add(new Card(4, "Hearts"));
+            player2.listOfCards.Add(new Card(3, "Spades"));
+            player2.listOfCards.Add(new Card(6, "Hearts"));
+            player2.listOfCards.Add(new Card(7, "Hearts"));
+            player2.listOfCards.Add(new Card(5, "Spades"));
+            player2.listOfCards.Add(new Card(5, "Hearts"));
+            player2.listOfCards.Add(new Card(10, "Hearts"));
+
+            IPlayer player3 = GetPlayerMock();
+            player3.listOfCards.Add(new Card(10, "Spades"));
+            player3.listOfCards.Add(new Card(11, "Hearts"));
+            player3.listOfCards.Add(new Card(7, "Spades"));
+
+            IPlayer player4 = GetPlayerMock();
+            player4.listOfCards.Add(new Card(10, "Spades"));
+            player4.listOfCards.Add(new Card(5, "Hearts"));
+            player4.listOfCards.Add(new Card(2, "Spades"));
+            player4.listOfCards.Add(new Card(11, "Hearts"));
+
+            IPlayer player5 = GetPlayerMock();
+            player5.listOfCards.Add(new Card(7, "Spades"));
+            player5.listOfCards.Add(new Card(7, "Hearts"));
+            player5.listOfCards.Add(new Card(2, "Spades"));
+            player5.listOfCards.Add(new Card(2, "Hearts"));
+            player5.listOfCards.Add(new Card(12, "Spades"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+            blackjack.AddPlayer(player3);
+            blackjack.AddPlayer(player4);
+            blackjack.AddPlayer(player5);
+
+            string expectedWinner = null;
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+        [TestMethod()]
+        public void EvaluateTest8()
+        {
+            ////Arrange
+
+            IPlayer player1 = GetPlayerMock();
+            player1.listOfCards.Add(new Card(12, "Diamond"));
+            player1.listOfCards.Add(new Card(10, "Clubs"));
+
+            IPlayer player2 = GetPlayerMock();
+            player2.listOfCards.Add(new Card(8, "Spades"));
+            player2.listOfCards.Add(new Card(12, "Hearts"));
+
+            IPlayer player3 = GetPlayerMock();
+            player3.listOfCards.Add(new Card(10, "Spades"));
+            player3.listOfCards.Add(new Card(10, "Hearts"));
+
+            IPlayer player4 = GetPlayerMock();
+            player4.listOfCards.Add(new Card(7, "Spades"));
+            player4.listOfCards.Add(new Card(13, "Hearts"));
+
+            Blackjack blackjack = new Blackjack();
+            blackjack.AddPlayer(player1);
+            blackjack.AddPlayer(player2);
+            blackjack.AddPlayer(player3);
+            blackjack.AddPlayer(player4);
+
+            string expectedWinner = player2.Id.ToString();
+
+            ////Act
+
+            var actualWinner = blackjack.Evaluate();
+
+            ////Assert 
+
+            Assert.AreEqual(expectedWinner, actualWinner);
+        }
+    }
+}
