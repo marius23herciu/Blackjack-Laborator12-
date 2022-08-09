@@ -8,16 +8,18 @@ namespace Blackjack_Laborator12_.DeckOfCards
     public class Deck
     {
         public List<Card> deck = new List<Card>();
+        /// <summary>
+        /// Creates a full deck of cards.
+        /// </summary>
         public Deck()
         {
             this.deck = FillDeck();
         }
         /// <summary>
-        /// Creates a full deck of cards.
+        /// Fills a deck of cards.
         /// </summary>
         public List<Card> FillDeck()
         {
-            int index = 0;
             if (deck.Count > 0)
             {
                 deck.RemoveRange(0, deck.Count);
@@ -28,7 +30,6 @@ namespace Blackjack_Laborator12_.DeckOfCards
                 {
                     Card card = new Card(value, suit);
                     deck.Add(card);
-                    index++;
                 }
             }
             return deck;
