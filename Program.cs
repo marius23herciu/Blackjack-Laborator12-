@@ -22,17 +22,19 @@ namespace Blackjack_Laborator12_
 
             john.DrawCard(deck);
             john.DrawCard(deck);
-            Console.WriteLine(john);
 
             robert.DrawCard(deck);
             robert.DrawCard(deck);
             robert.DrawCard(deck);
-            Console.WriteLine(robert);
 
             andrew.DrawCard(deck);
             andrew.DrawCard(deck);
             andrew.DrawCard(deck);
-            Console.WriteLine(andrew);
+
+            foreach (var player in blackjack.listOfPlayers)
+            {
+                Console.WriteLine(player);
+            }
 
             deck.FillDeck();
             deck.ShuffleDeck();
