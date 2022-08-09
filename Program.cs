@@ -9,7 +9,6 @@ namespace Blackjack_Laborator12_
         static void Main(string[] args)
         {
             Deck deck = new Deck();
-            deck.FillDeck();
             deck.ShuffleDeck();
 
             Player john = new Player("John");

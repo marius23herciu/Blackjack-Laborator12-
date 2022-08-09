@@ -8,11 +8,14 @@ namespace Blackjack_Laborator12_.DeckOfCards
     public class Deck
     {
         public List<Card> deck = new List<Card>();
-
+        public Deck()
+        {
+            this.deck = FillDeck();
+        }
         /// <summary>
         /// Creates a full deck of cards.
         /// </summary>
-        public void FillDeck()
+        public List<Card> FillDeck()
         {
             int index = 0;
             if (deck.Count > 0)
@@ -28,6 +31,7 @@ namespace Blackjack_Laborator12_.DeckOfCards
                     index++;
                 }
             }
+            return deck;
         }
         /// <summary>
         /// Shuffles the cards existent in a deck.
